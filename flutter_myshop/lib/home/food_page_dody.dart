@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_myshop/utils/colors.dart';
 import 'package:flutter_myshop/widgets/big_text.dart';
+import 'package:flutter_myshop/widgets/icon_text_widget.dart';
 import 'package:flutter_myshop/widgets/small_text.dart';
 
 class FoodPageBody extends StatefulWidget {
@@ -14,6 +13,22 @@ class FoodPageBody extends StatefulWidget {
 
 class _FoodPageBodyState extends State<FoodPageBody> {
   PageController pageController = PageController(viewportFraction: 0.85);
+  var _currPageValue=0.0;
+
+
+  @override
+  void  initState(){
+    super.initState();
+    pageController.addListener((){
+    _currPageValue= pageController.page!;
+    print("Currrent value is"+_currPageValue.toString());
+    });
+  }
+  @override
+  void dispose() {
+    pageController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -71,9 +86,31 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                           );}),
                       ),
                       SizedBox(width: 10,),
-                      SmallText(text: "4.5")
+                      SmallText(text: "4.5"),
+                      SizedBox(width: 10,),
+                      SmallText(text: '120'),
+                      SizedBox(width: 5,),
+                      SmallText(text: 'ความคิดเห็น')
                     ],
-                  )
+                  ),
+                  SizedBox(height: 10,),
+                  Row(
+                    children: [
+                     IconTextWidget(icon: Icons.circle_sharp, 
+                     text: 'Nomal', 
+                     iconColor: AppColors.iconColor1),
+                     SizedBox(width: 10,),
+                     IconTextWidget(icon: Icons.location_on,
+                     text: '1.7km', 
+                     iconColor: AppColors.maimColor),
+                     SizedBox(width: 10,),
+                     IconTextWidget(icon: Icons.access_time_rounded, 
+                     text: '38mn', 
+                     iconColor: AppColors.iconColor2),
+                     SizedBox(width: 10,),
+                    ],
+                  ),
+                  
                 ],
               ),
             ),
